@@ -1,4 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no" ?>
 <!-- Edited By POOL -->
 <!DOCTYPE POOLFILECATALOG SYSTEM "InMemory">
 <POOLFILECATALOG>
+  <File ID="0A2ABC0F-BBAE-DA11-8DD8-000E0C4D3C7E">
+    <physical>
+      <pfn filetype="ROOT_All" name="file:simevent_onlyTracker.root"/>
+    </physical>
+    <logical/>
+  </File>
+
 </POOLFILECATALOG>
