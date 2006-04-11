@@ -9,4 +9,11 @@
     <logical/>
   </File>
 
+  <File ID="6CFD7030-59C9-DA11-A983-0002B3E94A9B">
+    <physical>
+      <pfn filetype="ROOT_All" name="file:pv.root"/>
+    </physical>
+    <logical/>
+  </File>
+
 </POOLFILECATALOG>
