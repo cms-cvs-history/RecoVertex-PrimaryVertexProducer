@@ -2,10 +2,15 @@
 
   include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
 
-  es_source = XMLIdealGeometryESSource 
-  {
-    FileInPath GeometryConfiguration="Geometry/TrackerSimData/data/trackerSimConfiguration.xml"
-    string rootNodeName = ""
-  }
+#  es_source = XMLIdealGeometryESSource 
+#  {
+#    FileInPath GeometryConfiguration="Geometry/TrackerSimData/data/trackerSimConfiguration.xml"
+#    string rootNodeName = ""
+#  }
+  # tracker geometry
+#  include "Geometry/TrackerGeometryBuilder/data/trackerGeometry.cfi"
+
+  # tracker numbering
+#  include "Geometry/TrackerNumberingBuilder/data/trackerNumberingGeometry.cfi"
 
   include "RecoVertex/PrimaryVertexProducer/data/OfflinePrimaryVertices.cfi"
