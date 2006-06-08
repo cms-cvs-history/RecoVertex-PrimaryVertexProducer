@@ -1,0 +1,11 @@
+  include "FWCore/MessageLogger/data/MessageLogger.cfi"
+
+  include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
+
+  es_source = XMLIdealGeometryESSource 
+  {
+    FileInPath GeometryConfiguration="Geometry/TrackerSimData/data/trackerSimConfiguration.xml"
+    string rootNodeName = ""
+  }
+
+  include "RecoVertex/PrimaryVertexProducer/data/OfflinePrimaryVertices.cfi"
