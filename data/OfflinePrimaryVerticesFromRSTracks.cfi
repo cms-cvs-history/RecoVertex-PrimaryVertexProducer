@@ -1,4 +1,4 @@
-module OfflinePrimaryVertices = PrimaryVertexProducer 
+module OfflinePrimaryVerticesFromRSTracks = PrimaryVertexProducer 
 {
 	# label of tracks to be used
 	string TrackLabel = "RSWMaterial"
