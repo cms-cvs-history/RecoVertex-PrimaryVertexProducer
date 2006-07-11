@@ -1,0 +1,3 @@
+module simpleVertexAnalysis = PrimaryVertexAnalyzer { 
+     untracked string outputFile="simpleVertexAnalyzer.root"
+}
