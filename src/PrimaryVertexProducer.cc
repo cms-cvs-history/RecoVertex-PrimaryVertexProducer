@@ -136,4 +136,4 @@ std::string PrimaryVertexProducer::trackLabel() const
 
 
 //define this as a plug-in
-DEFINE_FWK_MODULE(PrimaryVertexProducer)
+//DEFINE_FWK_MODULE(PrimaryVertexProducer)
