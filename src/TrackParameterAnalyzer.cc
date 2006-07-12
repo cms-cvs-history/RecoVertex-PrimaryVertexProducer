@@ -63,17 +63,16 @@ void TrackParameterAnalyzer::endJob() {
   h2_dvsphi_->Write();
 }
 
+
 // helper function
-bool TrackParameterAnalyzer::match(const reco::perigee::Parameters *a, const reco::perigee::Parameters *b){
-  if(    (fabs((*a)(1)-(*b)(1))<0.1)
-      && (fabs((*a)(1)-(*b)(1))<0.1)
-      && (fabs((*a)(2)-(*b)(2))<0.1)
-	 ){
-    return true;
-  }else{
-    return false;
-  }
+bool TrackParameterAnalyzer::match(const reco::perigee::Parameters &a, 
+				   const reco::perigee::Parameters &b){
+  double dtheta=a(1)-b(1);
+  double dphi  =a(2)-b(2);
+  if (dphi>M_PI){ dphi-=M_2_PI; }else if(dphi<-M_PI){dphi+=M_2_PI;}
+  return ((fabs(dtheta)<0.1)&&(fabs(dphi)<0.1));
 }
+
 
 // ------------ method called to produce the data  ------------
 void
@@ -81,13 +80,13 @@ TrackParameterAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
 {
    using namespace edm;
   
+   // get the simulated vertices
    Handle<edm::SimVertexContainer> simVtcs;
    iEvent.getByLabel("SimG4Object", simVtcs);
    std::cout << "SimVertex " << simVtcs->size() << std::endl;
    for(edm::SimVertexContainer::const_iterator v=simVtcs->begin();
        v!=simVtcs->end(); ++v){
      std::cout << "simvtx "
-	       << std::setw(10) << std::setprecision(3)
 	       << v->position().x() << " "
 	       << v->position().y() << " "
 	       << v->position().z() << " "
@@ -118,7 +117,6 @@ TrackParameterAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
        }
        HepLorentzVector p=t->momentum();
        std::cout << "simtrk "
-		 << std::setw(10) << std::setprecision(3)
 		 << t->genpartIndex() << " "
 		 << t->vertIndex() << " "
 		 << t->type() << " "
@@ -162,43 +160,16 @@ TrackParameterAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
      reco::perigee::Covariance c = t->covariance();
      for(std::vector<reco::perigee::Parameters>::const_iterator s=tsim.begin();
 	 s!=tsim.end(); ++s){
-       if (match(&(*s),&p)){
-	 std::cout << "match found" << std::endl;
+       if (match(*s,p)){
+	 h1_pull0_->Fill((p(0)-(*s)(0))/sqrt(c(0,0)));
+	 h1_pull1_->Fill((p(1)-(*s)(1))/sqrt(c(1,1)));
+	 h1_pull2_->Fill((p(2)-(*s)(2))/sqrt(c(2,2)));
+	 h1_pull3_->Fill((p(3)-(*s)(3))/sqrt(c(3,3)));
+	 h1_pull4_->Fill((p(4)-(*s)(4))/sqrt(c(4,4)));
+	 h1_Beff_->Fill(p(0)/(*s)(0)*fBfield);
+	 h2_dvsphi_->Fill(p(2),p(3));
        }
-       h1_pull0_->Fill((p(0)-(*s)(0))/sqrt(c(0,0)));
-       h1_pull1_->Fill((p(1)-(*s)(1))/sqrt(c(1,1)));
-       h1_pull2_->Fill((p(2)-(*s)(2))/sqrt(c(2,2)));
-       h1_pull3_->Fill((p(3)-(*s)(3))/sqrt(c(3,3)));
-       h1_pull4_->Fill((p(4)-(*s)(4))/sqrt(c(4,4)));
-       h1_Beff_->Fill(p(0)/(*s)(0)*fBfield);
-       h2_dvsphi_->Fill(p(2),p(3));
      }
    }
 
-
-   /*
-   Handle<reco::VertexCollection> recVtxs;
-  iEvent.getByLabel("OfflinePrimaryVerticesFromCTFTracks", "TrackParameter",
-		    recVtxs);
-  std::cout << "vertices " << recVtxs->size() << std::endl;
-  for(reco::VertexCollection::const_iterator v=recVtxs->begin(); 
-      v!=recVtxs->end(); ++v){
-    std::cout << "recvtx " 
-	      << v->chi2() << " " 
-	      << v->ndof() << " " 
-	      << v->position().x() << " " << v->position().x()/sqrt(v->error(0,0)) << " " 
-	      << v->position().y() << " " << v->position().y()/sqrt(v->error(1,1)) << " " 
-	      << v->position().z() << " " << v->position().z()/sqrt(v->error(2,2)) << " " 
-	      << std::endl;
-    h1_pullx_->Fill(v->position().x()/sqrt(v->error(0,0)));
-    h1_pully_->Fill(v->position().y()/sqrt(v->error(1,1)));
-    h1_pullz_->Fill(v->position().z()/sqrt(v->error(2,2)));
-    h1_chi2_->Fill(v->chi2());
-    }
-   */
-
-
 }
-
-//define this as a plug-in
-//DEFINE_FWK_MODULE(TrackParameterAnalyzer)
