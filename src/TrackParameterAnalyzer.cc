@@ -1,7 +1,8 @@
 #include "RecoVertex/PrimaryVertexProducer/interface/TrackParameterAnalyzer.h"
 #include <string>
 #include <vector>
-
+#include "SimGeneral/HepPDT/interface/HepPDTable.h"
+#include "SimGeneral/HepPDT/interface/HepParticleData.h"
 
 //
 //
@@ -107,14 +108,9 @@ TrackParameterAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
      }else{
        // get the vertex position
        HepLorentzVector v=(*simVtcs)[t->vertIndex()].position();
-       int pdg=t->type();
-       //double Q=PDT->getParticleData(pdg)->charge();
-       double Q=0;
-       if(pdg==13){
-	 Q=-1.;
-       }else{
-	 Q=1.;
-       }
+       // get charge from pdg code, needed for curvature sign
+       int pdgCode=t->type();
+       double Q=HepPDT::theTable().getParticleData(pdgCode)->charge();
        HepLorentzVector p=t->momentum();
        std::cout << "simtrk "
 		 << t->genpartIndex() << " "
@@ -124,17 +120,19 @@ TrackParameterAnalyzer::analyze(const edm::Event& iEvent, const edm::EventSetup&
 		 << p.perp() << " " 
 		 << " vx="  << v.x() << " vy=" << v.y() << " vz=" << v.z()   << " " 
 		 << std::endl;
+       // convert momentum and vertex position to perigee parameters
        double kappa=-Q*0.002998*fBfield/p.perp();
        double D0=v.x()*sin(p.phi())-v.y()*cos(p.phi())-0.5*kappa*(v.x()*v.x()+v.y()*v.y());
        double q=sqrt(1.-2.*kappa*D0);
        double s0=(v.x()*cos(p.phi())+v.y()*sin(p.phi()))/q;
        double s1;
-       if (fabs(kappa)>0.001){
+       if (fabs(kappa*s0)>0.001){
 	 s1=asin(kappa*s0)/kappa;
        }else{
 	 double ks02=(kappa*s0)*(kappa*s0);
 	 s1=s0*(1.+ks02/6.+3./40.*ks02*ks02+5./112.*pow(ks02,3));
        }       
+       // store parameters
        tsim.push_back(reco::perigee::Parameters(
 						kappa, 
 						p.theta(), 
