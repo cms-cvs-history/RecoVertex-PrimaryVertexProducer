@@ -13,7 +13,7 @@
 //
 // Original Author:  Wolfram Erdmann
 //         Created:  Fri Jun  2 10:54:05 CEST 2006
-// $Id$
+// $Id: PrimaryVertexAnalyzer.h,v 1.1 2006/07/11 11:40:32 werdmann Exp $
 //
 //
 
@@ -59,6 +59,9 @@ class PrimaryVertexAnalyzer : public edm::EDAnalyzer {
       // root file to store histograms
       std::string outputFile_; // output file
       TFile*  rootFile_;
+      TH1*   h1_resx_; 
+      TH1*   h1_resy_;
+      TH1*   h1_resz_;
       TH1*   h1_pullx_; 
       TH1*   h1_pully_;
       TH1*   h1_pullz_;
