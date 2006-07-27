@@ -1,4 +1,0 @@
-############ initialize magnetic field #########################
-include "MagneticField/Engine/data/volumeBasedMagneticField.cfi"
-
-include "RecoVertex/PrimaryVertexProducer/data/OfflinePrimaryVertices.cfi"
