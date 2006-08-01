@@ -1,3 +1,4 @@
 module simpleVertexAnalysis = PrimaryVertexAnalyzer { 
+     InputTag simG4 = SimG4Objects
      untracked string outputFile="simpleVertexAnalyzer.root"
 }
