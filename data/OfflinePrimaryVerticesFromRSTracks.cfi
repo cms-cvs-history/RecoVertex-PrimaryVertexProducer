@@ -1,7 +1,7 @@
-module OfflinePrimaryVerticesFromRSTracks = PrimaryVertexProducer 
+module offlinePrimaryVerticesFromRSTracks = PrimaryVertexProducer 
 {
 	# label of tracks to be used
-	string TrackLabel = "RSWMaterial"
+	string TrackLabel = "rsWithMaterialTracks"
 
 	PSet TkFilterParameters =
 	{

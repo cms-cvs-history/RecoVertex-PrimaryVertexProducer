@@ -1,7 +1,7 @@
-module OfflinePrimaryVerticesFromCTFTracks = PrimaryVertexProducer 
+module offlinePrimaryVerticesFromCTFTracks = PrimaryVertexProducer 
 {
 	# label of tracks to be used
-	string TrackLabel = "CTFWMaterial"
+	string TrackLabel = "ctfWithMaterialTracks"
 
 	PSet TkFilterParameters =
 	{
