@@ -1,4 +1,4 @@
 module simpleTrackAnalysis = TrackParameterAnalyzer { 
-     untracked string recoTrackProducer="ctfAnalyticalTracks"
+     untracked string recoTrackProducer="ctfWithMaterialTracks"
      untracked string outputFile="simpleTrackParameterAnalyzer.root"
 }
