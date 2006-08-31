@@ -1,4 +1,5 @@
-module simpleTrackAnalysis = TrackParameterAnalyzer { 
+module simpleTrackAnalysis = TrackParameterAnalyzer {
+     InputTag simG4 = g4SimHits	
      untracked string recoTrackProducer="ctfWithMaterialTracks"
      untracked string outputFile="simpleTrackParameterAnalyzer.root"
 }
