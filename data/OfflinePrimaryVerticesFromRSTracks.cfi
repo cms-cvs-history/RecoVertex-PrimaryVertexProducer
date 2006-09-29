@@ -2,6 +2,9 @@ module offlinePrimaryVerticesFromRSTracks = PrimaryVertexProducer
 {
 	# label of tracks to be used
 	string TrackLabel = "rsWithMaterialTracks"
+	bool useBeamConstraint = true
+	untracked bool verbose = true
+	string fitter = "KalmanVertexFitter"
 
 	PSet TkFilterParameters =
 	{
