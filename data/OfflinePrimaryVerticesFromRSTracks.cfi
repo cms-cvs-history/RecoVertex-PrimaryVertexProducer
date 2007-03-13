@@ -4,7 +4,7 @@ module offlinePrimaryVerticesFromRSTracks = PrimaryVertexProducer
 	string TrackLabel = "rsWithMaterialTracks"
 	bool useBeamConstraint = false
 	untracked bool verbose = false
-	string fitter = "AdaptiveVertexFitter"
+	string algorithm = "AdaptiveVertexFitter"
 
 	PSet TkFilterParameters =
 	{
