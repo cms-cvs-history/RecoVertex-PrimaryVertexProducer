@@ -1,7 +1,7 @@
 module offlinePrimaryVerticesFromRSTracks = PrimaryVertexProducer 
 {
 	# label of tracks to be used
-	string TrackLabel = "rsWithMaterialTracks"
+	InputTag TrackLabel = "rsWithMaterialTracks"
 	bool useBeamConstraint = false
 	untracked bool verbose = false
 	string algorithm = "AdaptiveVertexFitter"
