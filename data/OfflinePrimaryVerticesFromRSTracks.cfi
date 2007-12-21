@@ -10,6 +10,9 @@ module offlinePrimaryVerticesFromRSTracks = PrimaryVertexProducer
 	{
 		double minPt = 0. // better for softish events
 		double maxD0Significance = 5. // keep most primary tracks
+		double maxNormalizedChi2 = 5.
+		int32 minSiliconHits = 7 // hits > 7
+		int32 minPixelHits = 2   // hits > 2
 	}
 	PSet TkClusParameters =
 	{
