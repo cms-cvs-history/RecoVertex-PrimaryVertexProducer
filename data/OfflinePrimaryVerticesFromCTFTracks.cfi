@@ -2,6 +2,7 @@ module offlinePrimaryVerticesFromCTFTracks = PrimaryVertexProducer
 {
 	# label of tracks to be used
 	InputTag TrackLabel = "ctfWithMaterialTracks"
+	InputTag beamSpotLabel = "offlineBeamSpot"
 	bool useBeamConstraint = false
 	untracked bool verbose = false
 	string algorithm = "AdaptiveVertexFitter"
