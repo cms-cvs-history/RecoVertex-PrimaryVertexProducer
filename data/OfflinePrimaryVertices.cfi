@@ -4,7 +4,7 @@ module offlinePrimaryVertices = PrimaryVertexProducer
 	InputTag TrackLabel = "generalTracks"
 	InputTag beamSpotLabel = "offlineBeamSpot"
 	bool useBeamConstraint = false
-	untracked bool verbose = true
+	untracked bool verbose = false
 	string algorithm = "AdaptiveVertexFitter"
 
 	PSet TkFilterParameters =
