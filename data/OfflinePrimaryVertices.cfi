@@ -21,7 +21,7 @@ module offlinePrimaryVertices = PrimaryVertexProducer
 	}
 	PSet PVSelParameters = 
 	{
-		double maxDistanceToBeam = 0.0200 // 200 microns
+		double maxDistanceToBeam = 0.0500 // 500 microns
 		double minVertexFitProb = 0.01 // 1% vertex fit probability
 	}
 	PSet VtxFinderParameters = 
