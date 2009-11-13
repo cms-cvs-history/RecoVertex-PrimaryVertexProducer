@@ -1,6 +1,6 @@
 import FWCore.ParameterSet.Config as cms
 
-offlinePrimaryVertices = cms.EDProducer("PrimaryVertexProducer",
+pixelVertices = cms.EDProducer("PrimaryVertexProducer",
     PVSelParameters = cms.PSet(
         maxDistanceToBeam = cms.double(2), ## 2 cms in case there is no beamspot (ONLY FOR STARTUP!)
 
@@ -8,10 +8,10 @@ offlinePrimaryVertices = cms.EDProducer("PrimaryVertexProducer",
 
     ),
     verbose = cms.untracked.bool(False),
-    algorithm = cms.string('AdaptiveVertexFitter'),
+    algorithm = cms.string('AdaptiveVertexFitter'), ## 100 is for when the beamspot is not well known (ONLY FOR STARTUP)
     TkFilterParameters = cms.PSet(
-        maxNormalizedChi2 = cms.double(5.0),
-        minSiliconHits = cms.int32(7), ## hits > 7
+        maxNormalizedChi2 = cms.double(100.0),
+        minSiliconHits = cms.int32(2), ## hits > 2 - for when the beamspot is not well known (ONLY FOR STARTUP)
 
         maxD0Significance = cms.double(100.0), ## 100 is for when the beamspot is not well known (ONLY FOR STARTUP)
 
@@ -22,7 +22,7 @@ offlinePrimaryVertices = cms.EDProducer("PrimaryVertexProducer",
     ),
     beamSpotLabel = cms.InputTag("offlineBeamSpot"),
     # label of tracks to be used
-    TrackLabel = cms.InputTag("generalTracks"),
+    TrackLabel = cms.InputTag("pixelTracks"),
     useBeamConstraint = cms.bool(False),
     VtxFinderParameters = cms.PSet(
         ptCut = cms.double(0.0),
