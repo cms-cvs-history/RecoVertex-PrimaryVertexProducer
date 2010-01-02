@@ -50,7 +50,7 @@ TrackClusterizerInZ::clusterize(const vector<reco::TransientTrack> & tracks)
       clusters.push_back(currentCluster);
       currentCluster.clear();
       currentCluster.push_back(*it);
-      it++; if (it == tks.end()) break;
+//      it++; if (it == tks.end()) break;
     }
   }
 
